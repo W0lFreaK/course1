@@ -3,66 +3,44 @@
 #include "stdafx.h"
 
 #include <iostream>
-//using namespace std;
+using namespace std;
 using namespace System;
 
-//void main()
-//{
-//	const int sl = 20;
-//	int i;
-//	int count = 0, maxcount = 0;
-//	char st[sl] = {}, st2[2 * sl] = {}, temp[sl] = {}, maxs[sl] = {};
-//	cin.getline(st, sl);
-//
-//	for (i = 0; i < sl - 1; i++)
-//	{
-//		st2[i] = ' ';
-//	}
-//
-//	cout << st2 << endl;
-//
-//	for (i = 0; i < strlen(st); i++)
-//	{
-//		st2[i] = st[strlen(st) - i - 1];
-//	}
-//
-//	for (i = 0; i < strlen(st); i++)
-//	{
-//		swap(st2[i], st2[strlen(st) + i]);
-//	}
-//
-//	st2[strlen(st2) - 1] = '\0';
-//
-//	while (st2[0] != st[0])
-//	{
-//		for (i = 0; i < strlen(st2) - 1; i++)
-//			st2[i] = st2[i + 1];
-//
-//		for (i = 0; i < strlen(st); i++)
-//		if (st2[i] == st[i])
-//		{
-//			count++;
-//			temp[count] = st[i];
-//		}
-//		else
-//		{
-//			if (count > maxcount && st[i - 1] == st[i - count])
-//			{
-//				maxcount = count;
-//				for (int j = 0;j < count; j++)
-//				{
-//					maxs[j] = temp[j];
-//				}
-//			}
-//		}
-//	}
-//		cout << st << endl << st2 << "#" << endl;
-//		cout << maxs << '\t' << maxcount << endl;
-//
-//	
-//}
+void main()
+{
+	const int strl = 100;
+	char str[strl] = {}, temp[strl] = {}, MaxStr[strl] = {};
+	int i, count = 0, MaxCount = 0, k = 0, j;
 
-//void main()
+	cin.getline(str, strl);
+
+	for (i = 0; i < strlen(str);i++)
+	{
+		if (str[i] == str[i + 1]) { k = 1; }
+		else
+			if
+				(str[i - 1] == str[i + 1])
+			{
+				k = 0;
+			}
+			else
+				continue;
+
+		while (str[i - count] == str[i + count + k] && (i - count)>=0  && (strlen(str) - i - count >= 0))
+		{
+			count++;
+		}
+		if (count > MaxCount)
+		{
+			for (j = 0; j < count * 2-1+k; j++)
+				MaxStr[j] = str[i - count / 2 + j-1];
+		}
+		count = 0;
+	}
+	cout << MaxStr << endl;
+}
+
+//++ void main()
 //{
 //	const int sl = 1000;
 //	char st[sl] = {};
@@ -109,48 +87,37 @@ using namespace System;
 //	cout << endl << st << endl;
 //}
 
-//void main()
+//++ void main()
 //{
 //	String^ str = Console::ReadLine();
 //	Console::WriteLine(str);
-//	int count = 0, countS = 0;
+//	int count = 0;
 //	
-//	str=str+" ";
-//	
-//	for (int i = 0; i < str->Length; i++)
-//	{
 //
-//		if (isspace(str[i]))
-//		{
-//			count++; 
-//			cout << countS << '\t';
-//			countS = 0;			
-//		}
-//		else
-//		{
-//			countS++;
-//		}
+//	array <Char>^ sep = {' '};
+//	array<String^>^ arr = str->Split( sep, StringSplitOptions::RemoveEmptyEntries);
+//	
+//	Console::WriteLine(arr->Length);
+//	for (int i = 0; i < arr->Length; i++)
+//	{
+//		count+=arr[i]->Length;	
 //	}
-//	cout << '\n' << count << endl;
+//	Console::WriteLine(count);
 //}
 
-void main()
-{
-	String^ str = Console::ReadLine();
-	int k = 0;
-
-	for (int i = 0; i < str->Length; i++)
-	{
-		
-		for (int j = i+1; j < str->Length; j++)
-		{
-			k++;
-		}
-
-		if (k != 0)
-		{
-			str->Replace(str[i], '\0');
-		}
-	}
-	Console::WriteLine(str);
-}
+//void main()
+//{
+//	String^ str = Console::ReadLine();
+//	int i = 0;	
+//	for (i = 0; i < str->Length; i++)
+//	{
+//		if (str->IndexOf(str[i], i + 1) != -1)
+//		{
+//			while (str->IndexOf(str[i], i + 1) != -1)
+//				str = str->Remove(str->IndexOf(str[i], i + 1),1);
+//			str = str->Remove(i, 1);
+//		}
+//
+//	}
+//	Console::WriteLine(str);
+//}
